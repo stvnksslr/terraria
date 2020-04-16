@@ -11,13 +11,12 @@ metadata:
   annotations:
   {{ toYaml .Values.terraria.service.annotations | indent 4 }}
 spec:
-  type: {{ .Values.terraria.service.type }}
+  type: LoadBalancer
   ports:
-    - port: {{ .Values.terraria.service.port }}
-      targetPort: server
+    - name: terraria-proxy
+      port: 7777
+      targetPort: 7777
       protocol: TCP
-      name: server
   selector:
     app.kubernetes.io/name: {{ include "terraria.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/part-of: {{ include "terraria.name"  .}}

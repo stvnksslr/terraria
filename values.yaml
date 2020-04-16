@@ -21,7 +21,7 @@ rest:
 
 terraria:
   service:
-    type: NodePort
+    type: ClusterIP
     port: 7777
     annotations: {}
   worldsize: large
