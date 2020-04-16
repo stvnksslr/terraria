@@ -7,17 +7,11 @@ metadata:
     helm.sh/chart: {{ include "terraria.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/part-of: {{ include "terraria.name"  .}}
-  annotations:
-  {{ toYaml .Values.terraria.service.annotations | indent 4 }}
 spec:
   type: {{ .Values.terraria.service.type }}
   ports:
-    - port: {{ .Values.terraria.service.port }}
-      targetPort: server
-      protocol: TCP
-      name: server
+    - port: 7777
+      targetPort: 7777
   selector:
     app.kubernetes.io/name: {{ include "terraria.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/part-of: {{ include "terraria.name"  .}}
